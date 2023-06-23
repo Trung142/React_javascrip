@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+
+    .tile {
+      text-align: center;
+      padding: 20px;
+      word-break: break-word;
+      font-size: 32px;
+      color: rgb(22, 24, 35);
+      font-family: SofiaPro, Arial, Tahoma, PingFangSC, sans-serif;
+      font-weight: bold;
+    }
+
+    input {
+      height: 44px;
+      background-color: rgba(22, 24, 35, 0.06);
+      outline: none;
+      border: none;
+      border-radius: 2px;
+      border: 0px solid rgba(22, 24, 35, 0.12);
+      margin: 9px 0;
+    }
+
+    .input-2 {
+      position: relative;
+
+      input {
+        width: 100%;
+      }
+
+      i {
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        cursor: pointer;
+      }
+    }
+
+    button {
+      background-color: rgba(22, 24, 35, 0.06);
+      color: rgba(22, 24, 35, 0.34);
+      height: 46px;
+      border: none;
+      border-radius: 4px;
+      margin: 20px 0;
+
+      &.active {
+        background-color: rgb(254, 44, 85);
+        color: white;
+      }
+
+    }
+
+    button[disabled=disabled],
+    button:disabled {
+      cursor: not-allowed;
+    }
+
+    .for-got {
+      color: rgba(22, 24, 35, 0.75);
+      font-size: 12px;
+      font-family: SofiaPro, Arial, Tahoma, PingFangSC, sans-serif;
+    }
+  }
+
+  .go-back {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

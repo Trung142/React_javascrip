@@ -1,0 +1,30 @@
+.sort-Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    i {
+        cursor: pointer;
+        margin: 2px;
+    }
+}
+
+.add-new {
+
+    justify-content: space-between;
+    align-items: center;
+
+    .group-btns {
+        display: flex;
+        gap: 10px;
+    }
+}
+
+.pagination {
+    justify-content: center;
+}
+
+.cutomize-table {
+    width: inherit;
+    overflow-x: auto;
+}
