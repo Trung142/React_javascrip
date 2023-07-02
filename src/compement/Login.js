@@ -1,43 +1,50 @@
-import { useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
-import { LoginAPI } from "../service/userservice";
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from "react";
-import { UserContext } from "../context/Usercontext";
+import { handleloginRedux } from "../redux/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 const Login = () => {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [isshowpassword, setisshowpassword] = useState(false);
-    const [loadingAPI, setloadingAPI] = useState(false);
-    const { loginContext } = useContext(UserContext);
+    //call hook
+    const loadingAPI = useSelector(state => state.user.loadingAPI)
+    const count = useSelector(state => state.user.count);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const handlelogin = async () => {
-        setloadingAPI(true)
+        //setloadingAPI(true)
         if (!email || !password) {
             toast.error("Email/password is required !");
-            setloadingAPI(false);
             return;
 
         }
-        let arr = await LoginAPI(email.trim(), password);
-        if (arr && arr.token) {
-            loginContext(email);
-            navigate("/");
-        } else {
-            //error
-            if (arr && arr.status === 400) {
-                toast.error(arr.data.error);
-            }
-        }
-        setloadingAPI(false);
+        dispatch(handleloginRedux(email, password));
+
+        // let arr = await LoginAPI(email.trim(), password);
+        // if (arr && arr.token) {
+        //     loginContext(email);
+        //     navigate("/");
+        // } else {
+        //     //error
+        //     if (arr && arr.status === 400) {
+        //         toast.error(arr.data.error);
+        //     }
+        // }
+        // setloadingAPI(false);
     }
+    //call navigate chuyển trang
+    useEffect(() => {
+        if (count && count.auth === true) {
+            navigate("/")
+        }
+    }, [count])
     //click  go back 
     const handlegoback = () => {
         navigate("/");
     }
     //onkeyDown enter
     const handlekeyDown = (event) => {
-        console.log(event);
         if (email && password && event && event.key === "Enter") {
             handlelogin();
             return;

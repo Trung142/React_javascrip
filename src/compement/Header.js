@@ -3,24 +3,25 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logo from '../assets/images/logo192.png';
-import { useLocation, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useContext } from 'react';
-import { UserContext } from '../context/Usercontext';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { handlelogoutRedux } from '../redux/actions/userActions';
 const Header = (props) => {
-    const { logout, user } = useContext(UserContext);
-    //const [hideHeader, sethideHeader] = useState(false);
-    // useEffect(() => {
-    //     if (window.location.pathname === "/login") {
-    //         sethideHeader(true);
-    //     }
-    // }, [])
-    const navigate = useNavigate()
+    //call hook
+    const navigate = useNavigate();
+    const user = useSelector(state => state.user.count);
+    const dispatch = useDispatch();
     const handlelogout = () => {
-        logout();
-        navigate("/");
-        toast.success("log out success !");
+        dispatch(handlelogoutRedux());
     }
+    useEffect(() => {
+        if (user && user.auth === false && window.location.pathname !== "/login") {
+            navigate("/");
+            toast.success("log out success !");
+        }
+    }, [user]);
     return (
         <>
             <Navbar bg="light" expand="lg">

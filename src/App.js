@@ -2,18 +2,16 @@ import Container from 'react-bootstrap/esm/Container';
 import './App.scss';
 import Header from "./compement/Header";
 import { ToastContainer } from 'react-toastify';
-import { useContext, useEffect } from 'react';
-import { UserContext } from './context/Usercontext';
+import { useEffect } from 'react';
 import AppRoutes from './routes/AppRoutes';
+import { handleRefreshRedux } from './redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 function App() {
-  //call userprovider userContext
-  const { loginContext } = useContext(UserContext);
+  const dispatch = useDispatch();
   //Call logincontext to usercontext
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      loginContext(localStorage.getItem("email"), localStorage.getItem("token"));
-
-    }
+    if (localStorage.getItem("token"))
+      dispatch(handleRefreshRedux());
   }, [])
 
   return (
